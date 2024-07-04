@@ -5,12 +5,12 @@
 # docs/source/dev/dockerfile/dockerfile.rst and
 # docs/source/assets/dev/dockerfile-stages-dependency.png
 
-ARG CUDA_VERSION=12.4.1
+ARG CUDA_VERSION=12.3.0
 #################### BASE BUILD IMAGE ####################
 # prepare basic build environment
-FROM nvidia/cuda:${CUDA_VERSION}-devel-ubuntu22.04 AS base
+FROM nvidia/cuda:${CUDA_VERSION}-devel-ubuntu20.04 AS base
 
-ARG CUDA_VERSION=12.4.1
+ARG CUDA_VERSION=12.3.0
 ARG PYTHON_VERSION=3
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -145,8 +145,8 @@ RUN pip --verbose wheel -r requirements-mamba.txt \
 
 #################### vLLM installation IMAGE ####################
 # image with vLLM installed
-FROM nvidia/cuda:${CUDA_VERSION}-base-ubuntu22.04 AS vllm-base
-ARG CUDA_VERSION=12.4.1
+FROM nvidia/cuda:${CUDA_VERSION}-base-ubuntu20.04 AS vllm-base
+ARG CUDA_VERSION=12.3.0
 WORKDIR /vllm-workspace
 
 RUN apt-get update -y \
